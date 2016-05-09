@@ -10,7 +10,7 @@ These validators are based on JSR 349 Bean Validation Specification
 Contact and Feedback
 --------------------
 
-You can contact sending an e-mail directly to *Santos Zatarain Vera <santoszv(at)inftel.com.mx>*,
+You can contact sending an e-mail directly to *Santos Zatarain Vera (santoszv(at)inftel.com.mx)*,
 please use as subject *CURP/RFC Validators*.
 
 License
