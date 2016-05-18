@@ -1,0 +1,319 @@
+\documentclass[12pt,letterpaper]{article}
+
+\usepackage[spanish,mexico]{babel}
+\usepackage{hyperref}
+\usepackage{fontspec}
+\usepackage{enumitem}
+\usepackage{moreverb}
+
+\setmainfont{CMU Serif}
+
+\begin{document}
+
+\title{Validadores para CURP y RFC}
+\author{Santos Zatarain Vera <santoszv(at)inftel.com.mx>}
+
+\maketitle
+
+\tableofcontents
+
+\section{Validación de CURP}
+
+Para validar la \emph{Clave Única de Registro de Población} (CURP) se debe utilizar una o varias de
+las siguientes anotaciones:
+
+\begin{enumerate}[noitemsep]
+\item \texttt{@mx.com.inftel.validators.curp.CURP}
+\item \texttt{@mx.com.inftel.validators.curp.CURP.PalabraInconveniente}
+\item \texttt{@mx.com.inftel.validators.curp.CURP.DigitoVerificador}
+\end{enumerate}
+
+La anotación (1) valida si la cadena de texto contiene un CURP bien formado, la anotación (2) valida que no exista
+alguna palabra inconveniente al principio de la cadena de texto y por último, la anotación (3) calcula y valida
+el dígito verificador. Todas las anotaciones etán implementadas como \emph{regular constraints} según lo especificado
+en \emph{JSR 349 Bean Validation Specification (formerly JSR 303)}.
+
+Todas anotaciones tienen los parámetros comunes para \emph{constraints}:
+
+\begin{description}[noitemsep]
+\item[message] La plantilla del mensaje de error
+\item[groups] Los grupos de validación
+\item[payload] Carga adicional del \emph{constraint}
+\end{description}
+
+Los parámetros comunes usan los valores por defecto recomendados según lo especificado en \emph{JSR 349 Bean
+Validation Specification (formerly JSR 303)}.
+
+Solo la anotación (1) tiene dos parámetros adicionales a los comunes:
+
+\begin{description}[noitemsep]
+\item[isNullValueValid] Indicación para aceptar a \texttt{null} (nulo) como un valor válido, por defecto
+    es \texttt{true}
+\item[isEmptyValueValid] Indicación para aceptar a \texttt{\textquotedbl\textquotedbl} (cadena vacía) como un valor
+    válido, por defecto es \texttt{false}
+\end{description}
+
+Cada anotación contiene el subelemento \texttt{List} para especificar de forma múltiple el \emph{constraint}, de
+acuerdo las recomendaciones del \emph{JSR 349 Bean Validation Specification (formerly JSR 303)}.
+
+\subsection{Ejemplo 1}
+
+Validación simple, solo se comprueba que esté bien formado el CURP.
+
+\begin{listing}{1}
+package my.pkg;
+
+import mx.com.inftel.validators.curp.CURP;
+
+public class JavaBean{
+
+    @CURP
+    private String curp;
+
+    public JavaBean(){}
+
+    public String getCurp(){return curp;}
+
+    public void setCurp(String curp){this.curp = curp;}
+}
+\end{listing}
+
+\subsection{Ejemplo 2}
+
+Validación de CURP, la cadena vacía también es aceptada como válida. Esta forma es usada por aplicaciones
+web principalmente, los formularios regularmente son enviados con campos vacios.
+
+\begin{listing}{1}
+package my.pkg;
+
+import mx.com.inftel.validators.curp.CURP;
+
+public class JavaBean{
+
+    @CURP(isEmptyValueValid = true)
+    private String curp;
+
+    public JavaBean(){}
+
+    public String getCurp(){return curp;}
+
+    public void setCurp(String curp){this.curp = curp;}
+}
+\end{listing}
+
+\subsection{Ejemplo 3}
+
+Validación de CURP, con comprobación del dígito verificador.
+
+\begin{listing}{1}
+package my.pkg;
+
+import mx.com.inftel.validators.curp.CURP;
+import mx.com.inftel.validators.curp.CURP.DigitoVerificador;
+
+public class JavaBean{
+
+    @CURP
+    @DigitoVerificador
+    private String curp;
+
+    public JavaBean(){}
+
+    public String getCurp(){return curp;}
+
+    public void setCurp(String curp){this.curp = curp;}
+}
+\end{listing}
+
+\section{Validación de RFC}
+
+Para validar el \emph{Registro Federal de Contribuyente} (RFC) se debe utilizar una o varias de
+las siguientes anotaciones:
+
+\begin{enumerate}[noitemsep]
+\item \texttt{@mx.com.inftel.validators.rfc.RFC}
+\item \texttt{@mx.com.inftel.validators.rfc.RFC.PalabraInconveniente}
+\item \texttt{@mx.com.inftel.validators.rfc.RFC.DigitoVerificador}
+\end{enumerate}
+
+La anotación (1) valida si la cadena de texto contiene un RFC bien formado, la anotación (2) valida que no exista
+alguna palabra inconveniente al principio de la cadena de texto y por último, la anotación (3) calcula y valida
+el dígito verificador. Todas las anotaciones etán implementadas como \emph{regular constraints} según lo especificado
+en \emph{JSR 349 Bean Validation Specification (formerly JSR 303)}.
+
+Todas anotaciones tienen los parámetros comunes para \emph{constraints}:
+
+\begin{description}[noitemsep]
+\item[message] La plantilla del mensaje de error
+\item[groups] Los grupos de validación
+\item[payload] Carga adicional del \emph{constraint}
+\end{description}
+
+Los parámetros comunes usan los valores por defecto recomendados según lo especificado en \emph{JSR 349 Bean
+Validation Specification (formerly JSR 303)}.
+
+Solo la anotación (1) tiene cuatro parámetros adicionales a los comunes:
+
+\begin{description}[noitemsep]
+\item[isNullValueValid] Indicación para aceptar a \texttt{null} (nulo) como un valor válido, por defecto
+    es \texttt{true}
+\item[isEmptyValueValid] Indicación para aceptar a \texttt{\textquotedbl\textquotedbl} (cadena vacía) como un valor
+    válido, por defecto es \texttt{false}
+\item[isXAXX010101000ValueValid] Indicación para aceptar a \texttt{\textquotedbl{}XAXX010101000\textquotedbl}
+    (RFC para público general) como un valor válido, por defecto es \texttt{false}
+\item[isXEXX010101000ValueValid] Indicación para aceptar a \texttt{\textquotedbl{}XEXX010101000\textquotedbl}
+    (RFC para extranjero) como un valor válido, por defecto es \texttt{false}
+\end{description}
+
+Cada anotación contiene el subelemento \texttt{List} para especificar de forma múltiple el \emph{constraint}, de
+acuerdo las recomendaciones del \emph{JSR 349 Bean Validation Specification (formerly JSR 303)}.
+
+\subsection{Ejemplo 1}
+
+Validación simple, solo se comprueba que esté bien formado el RFC.
+
+\begin{listing}{1}
+package my.pkg;
+
+import mx.com.inftel.validators.rfc.RFC;
+
+public class JavaBean{
+
+    @RFC
+    private String rfc;
+
+    public JavaBean(){}
+
+    public String getRfc(){return rfc;}
+
+    public void setRfc(String rfc){this.rfc = rfc;}
+}
+\end{listing}
+
+\subsection{Ejemplo 2}
+
+Validación con grupos, para validar también el dígito verificador, es necesario usar el grupo \texttt{ConDigito}.
+
+\begin{listing}{1}
+package my.pkg;
+
+import mx.com.inftel.validators.rfc.RFC;
+import mx.com.inftel.validators.rfc.RFC.DigitoVerificador;
+
+import javax.validation.groups.Default;
+
+public class JavaBean{
+
+    @RFC(groups = {Default.class, ConDigito.class})
+    @DigitoVerificador(groups = {ConDigito.class})
+    private String rfc;
+
+    public JavaBean(){}
+
+    public String getRfc(){return rfc;}
+
+    public void setRfc(String rfc){this.rfc = rfc;}
+}
+\end{listing}
+
+\subsection{Ejemplo 3}
+
+Validación de RFC, la cadena vacía también es aceptada como válida, también es válido
+\texttt{\textquotedbl{}XAXX010101000\textquotedbl} y \texttt{\textquotedbl{}XEXX010101000\textquotedbl}.
+
+\begin{listing}{1}
+package my.pkg;
+
+import mx.com.inftel.validators.rfc.RFC;
+import mx.com.inftel.validators.rfc.RFC.DigitoVerificador;
+
+public class JavaBean{
+
+    @RFC(isEmptyValueValid = true,
+         isXAXX010101000ValueValid = true,
+         isXEXX010101000ValueValid = true)
+    private String rfc;
+
+    public JavaBean(){}
+
+    public String getRfc(){return rfc;}
+
+    public void setRfc(String rfc){this.rfc = rfc;}
+}
+\end{listing}
+
+\section{Plantillas de los mensajes de error}
+
+Las plantillas \emph{por defecto} están escritas en español. Para comodidad de los traductores,
+también se incluyen plantillas traducidas al inglés.
+
+\subsection{ValidationMessages.properties}
+
+\scriptsize
+\begin{listing}{1}
+mx.com.inftel.validators.curp.CURP.message=Este CURP está mal formado
+mx.com.inftel.validators.curp.CURP.PalabraInconveniente.message=Este CURP contiene una palabra inconveniente
+mx.com.inftel.validators.curp.CURP.DigitoVerificador.message=El dígito verificador no es correcto
+mx.com.inftel.validators.rfc.RFC.message=Este RFC no está bien formado
+mx.com.inftel.validators.rfc.RFC.PalabraInconveniente.message=Este RFC contiene una palabra inconveniente
+mx.com.inftel.validators.rfc.RFC.DigitoVerificador.message=El dígito verificador no es correcto
+\end{listing}
+\normalsize
+
+\subsection{ValidationMessages\textunderscore{}en.properties}
+
+\scriptsize
+\begin{listing}{1}
+mx.com.inftel.validators.curp.CURP.message=This CURP is not well-formed
+mx.com.inftel.validators.curp.CURP.PalabraInconveniente.message=This CURP has a drawback word
+mx.com.inftel.validators.curp.CURP.DigitoVerificador.message=The check digit is not correct
+mx.com.inftel.validators.rfc.RFC.message=This RFC is not well-formed
+mx.com.inftel.validators.rfc.RFC.PalabraInconveniente.message=This RFC has a drawback word
+mx.com.inftel.validators.rfc.RFC.DigitoVerificador.message=The check digit is not correct
+\end{listing}
+\normalsize
+
+\section{Integración con Maven}
+
+Este proyecto está sincronizado en el \emph{Maven Central Repository}, así que,
+para integrar las anotaciones a un proyecto \emph{Maven}, solo se debe agregar
+la dependencia, como lo muestra el siguiente \emph{snippet}:
+
+\begin{verbatim}
+<dependency>
+    <artifactId>mx.com.inftel.oss</artifactId>
+    <groupId>curp-rfc-validators</groupId>
+    <version>2.0</version>
+</dependency>
+\end{verbatim}
+
+\section{Notas}
+
+Existen casos de RFC registrados ante el SAT con el dígito verificador incorrecto, por lo que
+es recomendable deshabilitar el \emph{constraint} de validación del dígito verificador si es necesario.
+
+\section{Contacto y sugerencias}
+
+Es posible contactar directamente escribiendo un correo electrónico a
+\emph{Santos Zatarain Vera <santoszv(at)inftel.com.mx>}, se agradece usar
+como asunto \emph{Validadores CURP/RFC}.
+
+\section{Licencia}
+
+\begin{verbatim}
+Copyright 2016 Santos Zatarain Vera
+
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+\end{verbatim}
+
+\end{document}
