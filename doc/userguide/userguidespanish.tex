@@ -23,9 +23,9 @@ Para validar la \emph{Clave Única de Registro de Población} (CURP) se debe uti
 las siguientes anotaciones:
 
 \begin{enumerate}[noitemsep]
-\item \texttt{@mx.com.inftel.validators.curp.CURP}
-\item \texttt{@mx.com.inftel.validators.curp.CURP.PalabraInconveniente}
-\item \texttt{@mx.com.inftel.validators.curp.CURP.DigitoVerificador}
+\item \texttt{@mx.com.inftel.contraints.curp.CURP}
+\item \texttt{@mx.com.inftel.contraints.curp.CURP.PalabraInconveniente}
+\item \texttt{@mx.com.inftel.contraints.curp.CURP.DigitoVerificador}
 \end{enumerate}
 
 La anotación (1) valida si la cadena de texto contiene un CURP bien formado, la anotación (2) valida que no exista
@@ -63,7 +63,7 @@ Validación simple, solo se comprueba que esté bien formado el CURP.
 \begin{listing}{1}
 package my.pkg;
 
-import mx.com.inftel.validators.curp.CURP;
+import mx.com.inftel.contraints.curp.CURP;
 
 public class JavaBean{
 
@@ -86,7 +86,7 @@ web principalmente, los formularios regularmente son enviados con campos vacios.
 \begin{listing}{1}
 package my.pkg;
 
-import mx.com.inftel.validators.curp.CURP;
+import mx.com.inftel.contraints.curp.CURP;
 
 public class JavaBean{
 
@@ -108,8 +108,8 @@ Validación de CURP, con comprobación del dígito verificador.
 \begin{listing}{1}
 package my.pkg;
 
-import mx.com.inftel.validators.curp.CURP;
-import mx.com.inftel.validators.curp.CURP.DigitoVerificador;
+import mx.com.inftel.contraints.curp.CURP;
+import mx.com.inftel.contraints.curp.CURP.DigitoVerificador;
 
 public class JavaBean{
 
@@ -131,9 +131,9 @@ Para validar el \emph{Registro Federal de Contribuyente} (RFC) se debe utilizar 
 las siguientes anotaciones:
 
 \begin{enumerate}[noitemsep]
-\item \texttt{@mx.com.inftel.validators.rfc.RFC}
-\item \texttt{@mx.com.inftel.validators.rfc.RFC.PalabraInconveniente}
-\item \texttt{@mx.com.inftel.validators.rfc.RFC.DigitoVerificador}
+\item \texttt{@mx.com.inftel.contraints.rfc.RFC}
+\item \texttt{@mx.com.inftel.contraints.rfc.RFC.PalabraInconveniente}
+\item \texttt{@mx.com.inftel.contraints.rfc.RFC.DigitoVerificador}
 \end{enumerate}
 
 La anotación (1) valida si la cadena de texto contiene un RFC bien formado, la anotación (2) valida que no exista
@@ -175,7 +175,7 @@ Validación simple, solo se comprueba que esté bien formado el RFC.
 \begin{listing}{1}
 package my.pkg;
 
-import mx.com.inftel.validators.rfc.RFC;
+import mx.com.inftel.contraints.rfc.RFC;
 
 public class JavaBean{
 
@@ -197,8 +197,8 @@ Validación con grupos, para validar también el dígito verificador, es necesar
 \begin{listing}{1}
 package my.pkg;
 
-import mx.com.inftel.validators.rfc.RFC;
-import mx.com.inftel.validators.rfc.RFC.DigitoVerificador;
+import mx.com.inftel.contraints.rfc.RFC;
+import mx.com.inftel.contraints.rfc.RFC.DigitoVerificador;
 
 import javax.validation.groups.Default;
 
@@ -224,8 +224,8 @@ Validación de RFC, la cadena vacía también es aceptada como válida, también
 \begin{listing}{1}
 package my.pkg;
 
-import mx.com.inftel.validators.rfc.RFC;
-import mx.com.inftel.validators.rfc.RFC.DigitoVerificador;
+import mx.com.inftel.contraints.rfc.RFC;
+import mx.com.inftel.contraints.rfc.RFC.DigitoVerificador;
 
 public class JavaBean{
 
@@ -251,12 +251,12 @@ también se incluyen plantillas traducidas al inglés.
 
 \scriptsize
 \begin{listing}{1}
-mx.com.inftel.validators.curp.CURP.message=Este CURP está mal formado
-mx.com.inftel.validators.curp.CURP.PalabraInconveniente.message=Este CURP contiene una palabra inconveniente
-mx.com.inftel.validators.curp.CURP.DigitoVerificador.message=El dígito verificador no es correcto
-mx.com.inftel.validators.rfc.RFC.message=Este RFC no está bien formado
-mx.com.inftel.validators.rfc.RFC.PalabraInconveniente.message=Este RFC contiene una palabra inconveniente
-mx.com.inftel.validators.rfc.RFC.DigitoVerificador.message=El dígito verificador no es correcto
+mx.com.inftel.contraints.curp.CURP.message=Este CURP está mal formado
+mx.com.inftel.contraints.curp.CURP.PalabraInconveniente.message=Este CURP contiene una palabra inconveniente
+mx.com.inftel.contraints.curp.CURP.DigitoVerificador.message=El dígito verificador no es correcto
+mx.com.inftel.contraints.rfc.RFC.message=Este RFC no está bien formado
+mx.com.inftel.contraints.rfc.RFC.PalabraInconveniente.message=Este RFC contiene una palabra inconveniente
+mx.com.inftel.contraints.rfc.RFC.DigitoVerificador.message=El dígito verificador no es correcto
 \end{listing}
 \normalsize
 
@@ -264,12 +264,12 @@ mx.com.inftel.validators.rfc.RFC.DigitoVerificador.message=El dígito verificado
 
 \scriptsize
 \begin{listing}{1}
-mx.com.inftel.validators.curp.CURP.message=This CURP is not well-formed
-mx.com.inftel.validators.curp.CURP.PalabraInconveniente.message=This CURP has a drawback word
-mx.com.inftel.validators.curp.CURP.DigitoVerificador.message=The check digit is not correct
-mx.com.inftel.validators.rfc.RFC.message=This RFC is not well-formed
-mx.com.inftel.validators.rfc.RFC.PalabraInconveniente.message=This RFC has a drawback word
-mx.com.inftel.validators.rfc.RFC.DigitoVerificador.message=The check digit is not correct
+mx.com.inftel.contraints.curp.CURP.message=This CURP is not well-formed
+mx.com.inftel.contraints.curp.CURP.PalabraInconveniente.message=This CURP has a drawback word
+mx.com.inftel.contraints.curp.CURP.DigitoVerificador.message=The check digit is not correct
+mx.com.inftel.contraints.rfc.RFC.message=This RFC is not well-formed
+mx.com.inftel.contraints.rfc.RFC.PalabraInconveniente.message=This RFC has a drawback word
+mx.com.inftel.contraints.rfc.RFC.DigitoVerificador.message=The check digit is not correct
 \end{listing}
 \normalsize
 
@@ -283,7 +283,7 @@ la dependencia, como lo muestra el siguiente \emph{snippet}:
 <dependency>
     <artifactId>mx.com.inftel.oss</artifactId>
     <groupId>curp-rfc-validators</groupId>
-    <version>2.0</version>
+    <version>3.0-SNAPSHOT</version>
 </dependency>
 \end{verbatim}
 

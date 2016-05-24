@@ -14,9 +14,9 @@
  *    limitations under the License.
  */
 
-package mx.com.inftel.validators.curp.validators;
+package mx.com.inftel.contraints.curp.validators;
 
-import mx.com.inftel.validators.curp.CURP;
+import mx.com.inftel.contraints.curp.CURP;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

@@ -14,55 +14,40 @@
  *    limitations under the License.
  */
 
-package mx.com.inftel.validators.curp.validators;
+package mx.com.inftel.contraints.rfc.validators;
 
-import mx.com.inftel.validators.curp.CURP;
+import mx.com.inftel.contraints.rfc.RFC;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.text.Normalizer;
 import java.util.Locale;
 
-public class PalabraInconvenienteValidator implements ConstraintValidator<CURP.PalabraInconveniente, String> {
+public class PalabraInconvenienteValidator implements ConstraintValidator<RFC.PalabraInconveniente, String> {
 
     private static final String[] PALABRAS = new String[]{
-            "BACA", "BAKA",
             "BUEI", "BUEY",
-            "CACA", "CACO", "CAGA", "CAGO", "CAKA", "CAKO",
-            "COGE", "COGI", "COJA", "COJE", "COJI", "COJO", "COLA",
+            "CACA", "CACO", "CAGA", "CAGO", "CAKA",
+            "COGE", "COJA", "COJE", "COJI", "COJO",
             "CULO",
-            "FALO",
             "FETO",
-            "GETA",
-            "GUEI", "GUEY",
+            "GUEY",
             "JOTO",
-            "KACA", "KACO", "KAGA", "KAGO", "KAKA", "KAKO",
-            "KOGE", "KOGI", "KOJA", "KOJE", "KOJI", "KOJO",
-            "KOLA",
+            "KACA", "KACO", "KAGA", "KAGO", "KAKA",
+            "KOGE", "KOJO",
             "KULO",
-            "LILO",
-            "LOCA", "LOCO", "LOKA", "LOKO",
             "MAME", "MAMO",
-            "MEAR", "MEAS", "MEON",
-            "MIAR", "MION",
-            "MOCO", "MOKO",
-            "MULA", "MULO",
-            "NACA", "NACO",
+            "MEAR", "MEON",
+            "MION",
+            "MOCO",
+            "MULA",
             "PEDA", "PEDO", "PENE",
-            "PIPI", "PITO",
-            "POPO",
             "PUTA", "PUTO",
             "QULO",
             "RATA",
-            "ROBA", "ROBE", "ROBO",
-            "RUIN",
-            "SENO",
-            "TETA",
-            "VACA", "VAGA", "VAGO", "VAKA",
-            "VUEI", "VUEY",
-            "WUEI", "WUEY"};
+            "RUIN"};
 
-    public void initialize(CURP.PalabraInconveniente constraintAnnotation) {
+    public void initialize(RFC.PalabraInconveniente constraintAnnotation) {
         // NO-OP
     }
 

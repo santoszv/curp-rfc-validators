@@ -14,11 +14,11 @@
  *    limitations under the License.
  */
 
-package mx.com.inftel.validators.rfc;
+package mx.com.inftel.contraints.rfc;
 
-import mx.com.inftel.validators.rfc.validators.DigitoVerificadorValidator;
-import mx.com.inftel.validators.rfc.validators.PalabraInconvenienteValidator;
-import mx.com.inftel.validators.rfc.validators.RFCValidator;
+import mx.com.inftel.contraints.rfc.validators.DigitoVerificadorValidator;
+import mx.com.inftel.contraints.rfc.validators.PalabraInconvenienteValidator;
+import mx.com.inftel.contraints.rfc.validators.RFCValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -68,7 +68,7 @@ public @interface RFC {
      *
      * @return Default message template string.
      */
-    String message() default "{mx.com.inftel.validators.rfc.RFC.message}";
+    String message() default "{mx.com.inftel.contraints.rfc.RFC.message}";
 
     /**
      * Standard group validation.
@@ -116,7 +116,7 @@ public @interface RFC {
          *
          * @return Default message template string.
          */
-        String message() default "{mx.com.inftel.validators.rfc.RFC.PalabraInconveniente.message}";
+        String message() default "{mx.com.inftel.contraints.rfc.RFC.PalabraInconveniente.message}";
 
         /**
          * Standard group validation.
@@ -156,7 +156,7 @@ public @interface RFC {
          *
          * @return Default message template string.
          */
-        String message() default "{mx.com.inftel.validators.rfc.RFC.DigitoVerificador.message}";
+        String message() default "{mx.com.inftel.contraints.rfc.RFC.DigitoVerificador.message}";
 
         /**
          * Standard group validation.

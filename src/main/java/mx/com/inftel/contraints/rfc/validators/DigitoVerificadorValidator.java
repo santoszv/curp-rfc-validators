@@ -14,40 +14,20 @@
  *    limitations under the License.
  */
 
-package mx.com.inftel.validators.rfc.validators;
+package mx.com.inftel.contraints.rfc.validators;
 
-import mx.com.inftel.validators.rfc.RFC;
+import mx.com.inftel.contraints.rfc.RFC;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
 import java.text.Normalizer;
 import java.util.Locale;
 
-public class PalabraInconvenienteValidator implements ConstraintValidator<RFC.PalabraInconveniente, String> {
+public class DigitoVerificadorValidator implements ConstraintValidator<RFC.DigitoVerificador, String> {
 
-    private static final String[] PALABRAS = new String[]{
-            "BUEI", "BUEY",
-            "CACA", "CACO", "CAGA", "CAGO", "CAKA",
-            "COGE", "COJA", "COJE", "COJI", "COJO",
-            "CULO",
-            "FETO",
-            "GUEY",
-            "JOTO",
-            "KACA", "KACO", "KAGA", "KAGO", "KAKA",
-            "KOGE", "KOJO",
-            "KULO",
-            "MAME", "MAMO",
-            "MEAR", "MEON",
-            "MION",
-            "MOCO",
-            "MULA",
-            "PEDA", "PEDO", "PENE",
-            "PUTA", "PUTO",
-            "QULO",
-            "RATA",
-            "RUIN"};
+    private static final String VALORES = "0123456789ABCDEFGHIJKLMN&OPQRSTUVWXYZ \u00D1";
 
-    public void initialize(RFC.PalabraInconveniente constraintAnnotation) {
+    public void initialize(RFC.DigitoVerificador constraintAnnotation) {
         // NO-OP
     }
 
@@ -58,12 +38,28 @@ public class PalabraInconvenienteValidator implements ConstraintValidator<RFC.Pa
 
         value = Normalizer.normalize(value, Normalizer.Form.NFC).toUpperCase(Locale.ENGLISH);
 
-        for (String palabra : PALABRAS) {
-            if (value.startsWith(palabra)) {
-                return false;
-            }
+        if (value.length() == 12) {
+            value = " " + value;
+        }
+        if (value.length() != 13) {
+            return false;
         }
 
-        return true;
+        int resultado = 0;
+        for (int i = 0; i < 12; i++) {
+            int valor = VALORES.indexOf(value.charAt(11 - i));
+            resultado += valor * (i + 2);
+        }
+        resultado = resultado % 11;
+        String digito;
+        if (resultado == 0) {
+            digito = "0";
+        } else if (resultado == 10) {
+            digito = "A";
+        } else {
+            digito = String.valueOf(11 - resultado);
+        }
+
+        return value.endsWith(digito);
     }
 }

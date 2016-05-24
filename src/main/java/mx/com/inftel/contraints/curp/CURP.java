@@ -14,11 +14,11 @@
  *    limitations under the License.
  */
 
-package mx.com.inftel.validators.curp;
+package mx.com.inftel.contraints.curp;
 
-import mx.com.inftel.validators.curp.validators.CURPValidator;
-import mx.com.inftel.validators.curp.validators.DigitoVerificadorValidator;
-import mx.com.inftel.validators.curp.validators.PalabraInconvenienteValidator;
+import mx.com.inftel.contraints.curp.validators.CURPValidator;
+import mx.com.inftel.contraints.curp.validators.DigitoVerificadorValidator;
+import mx.com.inftel.contraints.curp.validators.PalabraInconvenienteValidator;
 
 import javax.validation.Constraint;
 import javax.validation.Payload;
@@ -54,7 +54,7 @@ public @interface CURP {
      *
      * @return Default message template string.
      */
-    String message() default "{mx.com.inftel.validators.curp.CURP.message}";
+    String message() default "{mx.com.inftel.contraints.curp.CURP.message}";
 
     /**
      * Standard group validation.
@@ -102,7 +102,7 @@ public @interface CURP {
          *
          * @return Default message template string.
          */
-        String message() default "{mx.com.inftel.validators.curp.CURP.PalabraInconveniente.message}";
+        String message() default "{mx.com.inftel.contraints.curp.CURP.PalabraInconveniente.message}";
 
         /**
          * Standard group validation.
@@ -148,7 +148,7 @@ public @interface CURP {
          *
          * @return Default message template string.
          */
-        String message() default "{mx.com.inftel.validators.curp.CURP.DigitoVerificador.message}";
+        String message() default "{mx.com.inftel.contraints.curp.CURP.DigitoVerificador.message}";
 
         /**
          * Standard group validation.

@@ -14,9 +14,9 @@
  *    limitations under the License.
  */
 
-package mx.com.inftel.validators.rfc.validators;
+package mx.com.inftel.contraints.curp.validators;
 
-import mx.com.inftel.validators.rfc.RFC;
+import mx.com.inftel.contraints.curp.CURP;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;
@@ -25,21 +25,17 @@ import java.util.Locale;
 import java.util.Objects;
 import java.util.regex.Pattern;
 
-public class RFCValidator implements ConstraintValidator<RFC, String> {
+public class CURPValidator implements ConstraintValidator<CURP, String> {
 
     private Pattern pattern;
     private boolean isNullValueValid;
     private boolean isEmptyValueValid;
-    private boolean isXAXX010101000ValueValid;
-    private boolean isXEXX010101000ValueValid;
 
-    public void initialize(RFC constraintAnnotation) {
-        pattern = Pattern.compile("[&A-Z\u00D1]{3,4}[0-9]{6}[1-9A-Z]{2}[0-9A]{1}",
+    public void initialize(CURP constraintAnnotation) {
+        pattern = Pattern.compile("[A-Z]{4}[0-9]{6}[HM][A-Z]{2}[B-DF-HJ-NP-TV-Z]{3}[A-Z0-9][0-9]",
                 Pattern.CASE_INSENSITIVE | Pattern.UNICODE_CASE | Pattern.UNICODE_CHARACTER_CLASS);
         isNullValueValid = constraintAnnotation.isNullValueValid();
         isEmptyValueValid = constraintAnnotation.isEmptyValueValid();
-        isXAXX010101000ValueValid = constraintAnnotation.isXAXX010101000ValueValid();
-        isXEXX010101000ValueValid = constraintAnnotation.isXEXX010101000ValueValid();
     }
 
     public boolean isValid(String value, ConstraintValidatorContext context) {
@@ -52,14 +48,6 @@ public class RFCValidator implements ConstraintValidator<RFC, String> {
         }
 
         value = Normalizer.normalize(value, Normalizer.Form.NFC).toUpperCase(Locale.ENGLISH);
-
-        if (value.equals("XAXX010101000")) {
-            return isXAXX010101000ValueValid;
-        }
-
-        if (value.equals("XEXX010101000")) {
-            return isXEXX010101000ValueValid;
-        }
 
         return pattern.matcher(value).matches();
     }
